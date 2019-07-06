@@ -1,0 +1,33 @@
+{
+  "name": "workout-tracker-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AventusM/workout-tracker-backend.git"
+  },
+  "author": "AventusM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AventusM/workout-tracker-backend/issues"
+  },
+  "homepage": "https://github.com/AventusM/workout-tracker-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "mongoose": "^5.6.3",
+    "sinon": "^7.3.2",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

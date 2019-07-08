@@ -24,12 +24,11 @@ describe('listWorkouts test', () => {
 describe('createWorkout test', () => {
   it('succesfully creates a workout with valid data', () => {
     const save = sinon.spy()
-    let content
+    let results
 
     // Arrow function does not work here?
     const MockWorkoutModel = function (data) {
-      content = data.content
-      // console.log('given content', content)
+      results = data.results
       return {
         ...data,
         save
@@ -37,13 +36,24 @@ describe('createWorkout test', () => {
     }
 
     const workoutService = WorkoutService(MockWorkoutModel)
+    const customWorkout = [{
+      name: 'Bench press',
+      type: 'Machine',
+      weight: 85,
+      repetitions: 1,
+      sets: 1
+    }]
 
     // parameter works as data for MockWorkoutModel
-    workoutService.createWorkout('overhead press 5x55kg')
+    workoutService.createWorkout(customWorkout)
 
     // NOTICE DIFFERENCE COMPARED TO listWorkouts!
     expect(save.callCount).toBe(1)
-    expect(content).toEqual('overhead press 5x55kg')
+    expect(results[0].name).toEqual('Bench press')
+    expect(results[0].type).toEqual('Machine')
+    expect(results[0].weight).toEqual(85)
+    expect(results[0].repetitions).toEqual(1)
+    expect(results[0].sets).toEqual(1)
   })
 })
 

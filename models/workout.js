@@ -1,48 +1,26 @@
 const mongoose = require('mongoose')
 
+// Results have also user info. It should be unnecessary in workoutSchema context
+// as (currently) workout can be done by 1 person only
+// in future a workout could contain multiple users...
+// CURRENTLY CONSIDERING NEXT -- simply exclude user on population
+// https://stackoverflow.com/questions/26915116/mongoose-mongodb-exclude-fields-from-populated-query-data
 const workoutSchema = new mongoose.Schema({
-  discipline: {
-    type: String,
-    required: true
+  createdAt: {
+    type: Date,
+    default: () => Date.now()
   },
-  type: {
-    type: String,
-    required: true
-  },
-  weight: {
-    type: Number,
-    required: true
-  },
-  repetitions: {
-    type: Number,
-    required: true
+  results: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Result'
+    }
+  ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 
-// FUTURE CHANGES
-// FUTURE CHANGES
-
-// Workout should be a collection of done disciplines
-// e.g Contains an array of performed disciplines
-// and a user as a separate object
-// BELOW INTO Discipline model
-// discipline: {
-//   type: String,
-//   required: true
-// },
-// type: {
-//   type: String,
-//   required: true
-// },
-// weight: {
-//   type: Number,
-//   required: true
-// },
-// repetitions: {
-//   type: Number,
-//   required: true
-// }
-
 const Workout = mongoose.model('Workout', workoutSchema)
-
 module.exports = Workout

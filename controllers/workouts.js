@@ -12,11 +12,10 @@ workoutRouter.get('/', async (req, res, next) => {
 
 workoutRouter.post('/', async (req, res, next) => {
   try {
-    const { discipline, type, weight, repetitions } = req.body
-
+    const { results } = req.body
+    console.log('results (controller)', results)
     // GET USER DATA FROM request (cookies) + UserService (if needed)
-
-    const createdWorkout = await WorkoutService.createWorkout(discipline, type, weight, repetitions)
+    const createdWorkout = await WorkoutService.createWorkout(results)
     res.json(createdWorkout)
   } catch (exception) {
     next(exception)

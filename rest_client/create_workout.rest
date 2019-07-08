@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/workouts
+Content-Type: application/json
+
+{
+  "discipline": "Military press",
+  "type": "Barbell",
+  "weight": 55,
+  "repetitions": 4
+}

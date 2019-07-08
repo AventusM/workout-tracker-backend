@@ -9,9 +9,10 @@ describe('WorkoutService test', () => {
 
 describe('listWorkouts test', () => {
   it('lists workouts properly', () => {
+    const find = sinon.spy()
 
     const MockWorkoutModel = {
-      find: sinon.spy()
+      find: find
     }
 
     const workoutService = WorkoutService(MockWorkoutModel)

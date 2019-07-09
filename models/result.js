@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-// Attaching a user could be good in considering stats etc...
+// Attaching a user could be good in considering stats etc
+// Attaching related workout could be useful in tracking progress?
 const resultSchema = new mongoose.Schema({
   name: {
     type: String,

@@ -13,8 +13,8 @@ workoutRouter.get('/', async (req, res, next) => {
 workoutRouter.post('/', async (req, res, next) => {
   try {
     const { results } = req.body
-    console.log('results (controller)', results)
-    // GET USER DATA FROM request (cookies) + UserService (if needed)
+    // Only user id required so that mongoose can populate path later
+    // -> Get user data from request. No need to find user separately
     const createdWorkout = await WorkoutService.createWorkout(results)
     res.json(createdWorkout)
   } catch (exception) {

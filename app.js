@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const workoutRouter = require('./controllers/workouts')
+const resultRouter = require('./controllers/results')
 const mongoose = require('mongoose')
 
 console.log('connecting to', config.MONGODB_URI)
@@ -19,4 +20,5 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
 // app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use('/api/workouts', workoutRouter)
+app.use('/api/results', resultRouter)
 module.exports = app

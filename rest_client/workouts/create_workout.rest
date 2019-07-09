@@ -9,6 +9,13 @@ Content-Type: application/json
     "weight": 55,
     "repetitions": 4,
     "sets": 1
+    },
+        {
+    "name": "Bench press",
+    "type": "Dumbbell",
+    "weight": 70,
+    "repetitions": 3,
+    "sets": 1
     }
   ]
 }

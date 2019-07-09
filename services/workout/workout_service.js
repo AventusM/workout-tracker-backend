@@ -28,10 +28,16 @@ const deleteAllWorkouts = Workout => () => {
   return Workout.deleteMany({})
 }
 
+// Also delete results associated with this workout?
+const deleteWorkoutById = Workout => (id) => {
+  return Workout.findByIdAndRemove(id)
+}
+
 module.exports = (Workout, Result) => {
   return {
     listWorkouts: listWorkouts(Workout),
     createWorkout: createWorkout(Workout, Result),
-    deleteAllWorkouts: deleteAllWorkouts(Workout)
+    deleteAllWorkouts: deleteAllWorkouts(Workout),
+    deleteWorkoutById: deleteWorkoutById(Workout)
   }
 }

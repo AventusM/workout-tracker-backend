@@ -9,10 +9,16 @@ describe('WorkoutService test', () => {
 })
 
 describe('listWorkouts test', () => {
+  let find
+
+  afterEach(() => {
+    find.restore()
+  })
+
   it.only('calls mongoose find method when listing workouts', () => {
     // Chained promises with sinon 
     // https://github.com/bendrucker/sinon-as-promised/issues/1#issuecomment-50288769
-    const find = sinon
+    find = sinon
       .stub(Workout, 'find')
       .returns(({ populate: sinon.stub() }))
 

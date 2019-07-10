@@ -9,7 +9,7 @@
     "test": "jest --verbose",
     "test:model": "jest --testPathPattern model.test",
     "test:service": "jest --testPathPattern service.test",
-    "test:app": "jest --testPathPattern app.test"
+    "test:api": "jest --testPathPattern api.test"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,5 @@
 const WorkoutService = require('../workout_service')
+const Workout = require('../../../models/workout')
 const sinon = require('sinon')
 
 describe('WorkoutService test', () => {
@@ -8,11 +9,15 @@ describe('WorkoutService test', () => {
 })
 
 describe('listWorkouts test', () => {
-  it('lists workouts properly', () => {
-    const find = sinon.spy()
+  it.only('calls mongoose find method when listing workouts', () => {
+    // Chained promises with sinon 
+    // https://github.com/bendrucker/sinon-as-promised/issues/1#issuecomment-50288769
+    const find = sinon
+      .stub(Workout, 'find')
+      .returns(({ populate: sinon.stub() }))
 
     const MockWorkoutModel = {
-      find: find
+      find
     }
 
     const workoutService = WorkoutService(MockWorkoutModel)
@@ -22,7 +27,7 @@ describe('listWorkouts test', () => {
 })
 
 describe('createWorkout test', () => {
-  it('succesfully creates a workout with valid data', () => {
+  it('calls mongoose save method when creating a workout', () => {
     const save = sinon.spy()
     let results
 
@@ -63,6 +68,6 @@ describe('updateWorkout test', () => {
 })
 
 describe('deleteWorkout test', () => {
-  it.skip('deletes a workout with valid id', () => {
+  it.skip('calls mongoose delete method when deleting a workout', () => {
   })
 })

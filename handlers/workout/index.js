@@ -3,7 +3,7 @@ const WorkoutService = require('../../services/workout/index')
 const getAllWorkouts = async (req, res) => {
   try {
     const workouts = await WorkoutService.listWorkouts()
-    res.json(workouts)
+    res.status(200).json(workouts)
   } catch (exception) {
     next(exception)
   }

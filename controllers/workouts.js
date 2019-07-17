@@ -4,7 +4,7 @@ const {
   createNewWorkout,
   deleteSingleWorkoutById,
   deleteAllWorkouts
-} = require('../handlers/workouts')
+} = require('../handlers/workout/index')
 
 workoutRouter.get('/', getAllWorkouts)
 workoutRouter.post('/', createNewWorkout)

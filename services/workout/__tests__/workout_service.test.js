@@ -36,7 +36,7 @@ describe('listWorkouts test', () => {
 })
 
 describe('createWorkout test', () => {
-  it.only('calls mongoose save method when creating a workout', () => {
+  it('calls mongoose save method when creating a workout', () => {
     save_test_path.__set__('Result', sinon.stub().returns({ message: 'ollaan täällä!' }));
     let results
     const customResults = [{

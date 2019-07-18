@@ -15,10 +15,20 @@ const mockRes = () => {
   return res;
 }
 
+const mockNext = () => { }
+
 test('workout api should return 200 w/ GET', async (t) => {
-  sinon.stub(WorkoutService, 'listWorkouts').resolves({})
+  // Restore?
+  // Restore?
+  // Restore?
+  sinon.stub(WorkoutService, 'listWorkouts').resolves({ results: [] })
   const req = mockReq()
   const res = mockRes()
-  await getAllWorkouts(req, res)
-  t.true(res.status.calledWith(200))
+  const next = mockNext()
+  await getAllWorkouts(req, res, next)
+
+  const responseStatus200 = res.status.calledWith(200)
+  const returnsCorrectJSON = res.json.calledWith({ results: [] })
+  t.true(responseStatus200)
+  t.true(returnsCorrectJSON)
 })

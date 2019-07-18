@@ -1,6 +1,6 @@
 const WorkoutService = require('../../services/workout/index')
 
-const getAllWorkouts = async (req, res) => {
+const getAllWorkouts = async (req, res, next) => {
   try {
     const workouts = await WorkoutService.listWorkouts()
     res.status(200).json(workouts)

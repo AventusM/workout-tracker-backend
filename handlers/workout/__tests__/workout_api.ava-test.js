@@ -17,11 +17,15 @@ const mockRes = () => {
 
 const mockNext = () => { }
 
-test('workout api should return 200 w/ GET', async (t) => {
-  // Restore?
-  // Restore?
-  // Restore?
+test.beforeEach(() => {
   sinon.stub(WorkoutService, 'listWorkouts').resolves({ results: [] })
+})
+
+test.afterEach.always(() => {
+  WorkoutService.listWorkouts.restore()
+});
+
+test('workout api should return 200 w/ GET', async (t) => {
   const req = mockReq()
   const res = mockRes()
   const next = mockNext()

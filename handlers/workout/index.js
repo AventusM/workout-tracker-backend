@@ -18,7 +18,7 @@ const createNewWorkout = async (req, res, next) => {
     // Only user id required so that mongoose can populate path later
     // -> Get user data from request. No need to find user separately
     const createdWorkout = await WorkoutService.createWorkout(results)
-    res.json(createdWorkout)
+    res.status(200).json(createdWorkout)
   } catch (exception) {
     next(exception)
   }

@@ -1,7 +1,7 @@
 const test = require('ava')
 // allows for quick sinon.restore() instead of restoring other things 1 by 1
 const sinon = require('sinon').sandbox.create()
-const { getAllWorkouts } = require('../index')
+const { getAllWorkouts, createNewWorkout } = require('../index')
 const WorkoutService = require('../../../services/workout/index')
 
 const mockReq = (sessionData, body) => ({
@@ -23,6 +23,7 @@ test.beforeEach(() => {
   // Currently this (integration) test doesn't care for what this promise resolves into
   // Only the status code
   sinon.stub(WorkoutService, 'listWorkouts').resolves({ results: [] })
+  sinon.stub(WorkoutService, 'createWorkout').resolves({})
 })
 
 // Required --serial flag to package.json so restoring would work
@@ -43,8 +44,17 @@ test('workout api should return 200 w/ GET', async (t) => {
   t.true(returnsCorrectJSON)
 })
 
-test('workout api should return 200 w/ POST with VALID data AND VALID user', async (t) => {
-  t.true(true)
+test('workout api should return 200 w/ POST with VALID data + (TODO and valid user)', async (t) => {
+  const req = mockReq(null, { results: [] })
+  const res = mockRes()
+  const next = mockNext()
+
+  await createNewWorkout(req, res, next)
+
+  const responseStatus200 = res.status.calledWith(200)
+  const returnsCorrectJSON = res.json.calledWith({})
+  t.true(responseStatus200)
+  t.true(returnsCorrectJSON)
 })
 
 test('workout api should return 400 w/ POST with INVALID data and VALID user', async (t) => {

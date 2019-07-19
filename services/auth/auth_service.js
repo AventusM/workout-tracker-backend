@@ -5,11 +5,15 @@ const User = require('../../models/user')
 passport.use(new Strategy(
   async (username, password, done) => {
     const foundUser = await User.findOne({ username })
+    console.log('found user', foundUser)
     if (!foundUser) {
+      console.log('not found')
       return done(null, false)
     } else if (!foundUser.verifyPassword(password)) {
+      console.log('pw mismatch')
       return done(null, false)
     } else {
+      console.log('OK!')
       return done(null, foundUser)
     }
   }

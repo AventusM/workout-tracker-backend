@@ -4,17 +4,14 @@ const User = require('../../models/user')
 
 passport.use(new Strategy(
   async (username, password, done) => {
-    const foundUser = await User.find({ username })
-
+    const foundUser = await User.findOne({ username })
     if (!foundUser) {
-      console.log('user not found')
       return done(null, false)
-    }
-    if (password !== foundUser.password) {
-      console.log('user found, password mismatch')
+    } else if (!foundUser.verifyPassword(password)) {
       return done(null, false)
+    } else {
+      return done(null, foundUser)
     }
-    return done(null, foundUser)
   }
 ))
 
@@ -23,6 +20,6 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (id, done) => {
-  const deserializedUser = User.findById(id)
+  const deserializedUser = await User.findById(id)
   done(null, deserializedUser)
 })

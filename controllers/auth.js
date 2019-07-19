@@ -11,6 +11,15 @@ authRouter.get('/current_user', async (req, res, next) => {
   }
 })
 
+authRouter.get('/logout', async (req, res, next) => {
+  try {
+    req.session = null
+    res.redirect('/')
+  } catch (exception) {
+    next(exception)
+  }
+})
+
 authRouter.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), async (req, res, next) => {
   try {
     // Redirect to logged in index

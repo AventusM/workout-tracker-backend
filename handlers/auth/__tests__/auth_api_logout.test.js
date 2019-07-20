@@ -23,7 +23,7 @@ test.afterEach.always(() => {
   sinon.restore()
 })
 
-test('register should return 400 w/ missing username', async (t) => {
+test('logout should return 204 w/ request data', async (t) => {
   const req = mockReq(
     { user: 'TEST_MOCK_DATA' }, // Existing session data when logging out
     {}) // Empty body

@@ -3,6 +3,11 @@ const AuthService = require('../../services/auth/index')
 
 const get_current_user = async (req, res, next) => {
   try {
+
+    if (!req.user) {
+      return res.status(401).json({ message: 'you are not logged in' })
+    }
+
     res.json(req.user)
   } catch (exception) {
     next(exception)
@@ -12,7 +17,7 @@ const get_current_user = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     req.session = null
-    res.status(200).redirect('/')
+    res.status(200)
   } catch (exception) {
     next(exception)
   }
@@ -41,8 +46,7 @@ const register = async (req, res, next) => {
     }
 
     const newSavedUser = await AuthService.registerNewUser(username, password)
-
-    res.json(newSavedUser)
+    res.status(200).json(newSavedUser)
   } catch (exception) {
     next(exception)
   }

@@ -1,9 +1,9 @@
-const listAllResults = Result => () => {
+const Result = require('../../models/result')
+
+const listAllResults = () => {
   return Result.find({})
 }
 
-module.exports = Result => {
-  return {
-    listAllResults: listAllResults(Result)
-  }
+module.exports = {
+  listAllResults
 }

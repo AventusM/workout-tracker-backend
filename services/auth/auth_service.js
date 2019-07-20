@@ -1,6 +1,7 @@
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy
 const User = require('../../models/user')
+const bcrypt = require('bcrypt')
 
 passport.use(new Strategy(
   async (username, password, done) => {
@@ -27,3 +28,22 @@ passport.deserializeUser(async (id, done) => {
   const deserializedUser = await User.findById(id)
   done(null, deserializedUser)
 })
+
+const registerNewUser = async (username, password) => {
+  if (!(username && password))
+    throw new Error(`Username: ${username} -- pw: ${password}`)
+    
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  const newUser = new User({
+    username,
+    passwordHash
+  })
+
+  return await newUser.save()
+}
+
+module.exports = {
+  registerNewUser
+}

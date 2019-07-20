@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt')
 const User = require('../../models/user')
+const AuthService = require('../../services/auth/index')
 
 const get_current_user = async (req, res, next) => {
   try {
@@ -31,15 +31,7 @@ const login = async (req, res, next) => {
 const register = async (req, res, next) => {
   try {
     const { username, password } = req.body
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(password, saltRounds)
-
-    const newUser = new User({
-      username,
-      passwordHash
-    })
-
-    const newSavedUser = await newUser.save()
+    const newSavedUser = await AuthService.registerNewUser(username, password)
     res.json(newSavedUser)
   } catch (exception) {
     next(exception)

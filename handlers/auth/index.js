@@ -17,7 +17,7 @@ const get_current_user = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     req.session = null
-    res.status(204)
+    res.status(204).end()
   } catch (exception) {
     next(exception)
   }

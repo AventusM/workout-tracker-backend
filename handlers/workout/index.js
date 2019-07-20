@@ -12,12 +12,12 @@ const getAllWorkouts = async (req, res, next) => {
 const createNewWorkout = async (req, res, next) => {
   try {
     // Add createdAt field so user can choose the day workout was performed at
-    console.log('body', req.body)
     const { results } = req.body
+    const user_id = req.user._id
 
     // Only user id required so that mongoose can populate path later
     // -> Get user data from request. No need to find user separately
-    const createdWorkout = await WorkoutService.createWorkout(results)
+    const createdWorkout = await WorkoutService.createWorkout(results, user_id)
     res.status(200).json(createdWorkout)
   } catch (exception) {
     next(exception)

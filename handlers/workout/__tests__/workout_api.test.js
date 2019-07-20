@@ -49,7 +49,7 @@ test('workout api should return 200 w/ POST with VALID data + (TODO and valid us
   const res = mockRes()
   const next = mockNext()
 
-  await createNewWorkout(req, res, next)
+  await createNewWorkout(req, res, null)
 
   const responseStatus200 = res.status.calledWith(200)
   const returnsCorrectJSON = res.json.calledWith({})

@@ -30,8 +30,18 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { username, password } = req.body
+    const { username, password, passwordDuplicate } = req.body
+
+    if (password !== passwordDuplicate) {
+      return res.status(400).json({ message: 'password and password confirmation do not match' })
+    }
+
+    if (!(username && password)) {
+      return res.status(400).json({ message: 'username or password missing' })
+    }
+
     const newSavedUser = await AuthService.registerNewUser(username, password)
+
     res.json(newSavedUser)
   } catch (exception) {
     next(exception)

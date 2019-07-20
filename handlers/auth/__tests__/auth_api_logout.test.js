@@ -31,8 +31,8 @@ test('register should return 400 w/ missing username', async (t) => {
   const next = mockNext()
   await logout(req, res)
 
-  const responseStatus200 = res.status.calledWith(200)
+  const responseStatus204 = res.status.calledWith(204)
   const sessionDestroyed = req.session === null
-  t.true(responseStatus200)
+  t.true(responseStatus204)
   t.true(sessionDestroyed)
 })

@@ -8,7 +8,7 @@ const get_current_user = async (req, res, next) => {
       return res.status(401).json({ message: 'you are not logged in' })
     }
 
-    res.json(req.user)
+    res.status(200).json(req.user)
   } catch (exception) {
     next(exception)
   }
@@ -17,7 +17,7 @@ const get_current_user = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     req.session = null
-    res.status(200)
+    res.status(204)
   } catch (exception) {
     next(exception)
   }

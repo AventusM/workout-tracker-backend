@@ -33,9 +33,7 @@
   "devDependencies": {
     "ava": "^2.2.0",
     "nodemon": "^1.19.1",
-    "rewire": "^4.0.1",
-    "sinon": "^7.3.2",
-    "supertest": "^4.0.2"
+    "sinon": "^7.3.2"
   },
   "ava": {
     "files": [
